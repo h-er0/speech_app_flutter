@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:speech_app_flutter/app/routes/app_pages.dart';
+import 'package:speech_translate/app/routes/app_pages.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -43,14 +43,13 @@ class HomeController extends GetxController {
   void onInit() {
     text = Get.arguments["text"] ?? "";
     //_lastWords = widget.text ?? "";
-    textController = TextEditingController(text: text)
-      ..addListener(() {
-        speechEnabled
-            ? textController.text.isEmpty
-                ? 'Tap the microphone to start listening...'
-                : textController.text
-            : 'Speech not available';
-      });
+    textController = TextEditingController(text: text)..addListener(() {
+      speechEnabled
+          ? textController.text.isEmpty
+              ? 'Tap the microphone to start listening...'
+              : textController.text
+          : 'Speech not available';
+    });
     _initSpeech();
     super.onInit();
   }
@@ -91,7 +90,8 @@ class HomeController extends GetxController {
   //Error Listerner
   void errorListener(SpeechRecognitionError error) {
     _logEvent(
-        'Received error status: $error, listening: ${speechToText.isListening}');
+      'Received error status: $error, listening: ${speechToText.isListening}',
+    );
     lastError = '${error.errorMsg} - ${error.permanent}';
     update();
   }
@@ -99,7 +99,8 @@ class HomeController extends GetxController {
   //Status Listerner
   void statusListener(String status) {
     _logEvent(
-        'Received listener status: $status, listening: ${speechToText.isListening}');
+      'Received listener status: $status, listening: ${speechToText.isListening}',
+    );
     lastStatus = status;
     update();
   }
@@ -152,8 +153,11 @@ class HomeController extends GetxController {
 
   Future<void> translate() async {
     await translator
-        .translate(textController.text,
-            from: currentLocaleId, to: translateLocaleId)
+        .translate(
+          textController.text,
+          from: currentLocaleId,
+          to: translateLocaleId,
+        )
         .then((value) => translateText = value.text);
     update();
   }

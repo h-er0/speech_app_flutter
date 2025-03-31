@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,13 +13,14 @@ class HomeView extends GetView<HomeController> {
         title: const Text("Speech to text"),
         actions: [
           GestureDetector(
-              onTap: () {
-                controller.requestCamera();
-              },
-              child: const Padding(
-                padding: EdgeInsets.all(10),
-                child: Icon(Icons.camera),
-              ))
+            onTap: () {
+              controller.requestCamera();
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(10),
+              child: Icon(Icons.camera),
+            ),
+          ),
         ],
       ),
       body: Column(
@@ -36,15 +37,18 @@ class HomeView extends GetView<HomeController> {
                     controller.switchLang(selectedVal);
                   },
                   value: controller.currentLocaleId,
-                  items: controller.localeNames
-                      .map(
-                        (localeName) => DropdownMenuItem(
-                          value: localeName.localeId,
-                          child: SizedBox(
-                              width: 200, child: Text(localeName.name)),
-                        ),
-                      )
-                      .toList(),
+                  items:
+                      controller.localeNames
+                          .map(
+                            (localeName) => DropdownMenuItem(
+                              value: localeName.localeId,
+                              child: SizedBox(
+                                width: 200,
+                                child: Text(localeName.name),
+                              ),
+                            ),
+                          )
+                          .toList(),
                 ),
               ),
             ],
@@ -85,15 +89,18 @@ class HomeView extends GetView<HomeController> {
                     controller.update();
                   },
                   value: controller.translateLocaleId,
-                  items: controller.localeNames
-                      .map(
-                        (localeName) => DropdownMenuItem(
-                          value: localeName.localeId,
-                          child: SizedBox(
-                              width: 200, child: Text(localeName.name)),
-                        ),
-                      )
-                      .toList(),
+                  items:
+                      controller.localeNames
+                          .map(
+                            (localeName) => DropdownMenuItem(
+                              value: localeName.localeId,
+                              child: SizedBox(
+                                width: 200,
+                                child: Text(localeName.name),
+                              ),
+                            ),
+                          )
+                          .toList(),
                 ),
               ),
             ],
@@ -115,7 +122,8 @@ class HomeView extends GetView<HomeController> {
                 : controller.stopListening,
         tooltip: 'Listen',
         child: Icon(
-            controller.speechToText.isNotListening ? Icons.mic_off : Icons.mic),
+          controller.speechToText.isNotListening ? Icons.mic_off : Icons.mic,
+        ),
       ),
     );
   }
