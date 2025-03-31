@@ -1,0 +1,3 @@
+class CameraState {
+  const CameraState();
+}

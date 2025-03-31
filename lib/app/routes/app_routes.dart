@@ -1,14 +1,15 @@
-part of 'app_pages.dart';
-// DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
+part of 'app_router.dart';
 
 abstract class Routes {
   Routes._();
-  static const HOME = _Paths.HOME;
-  static const CAMERA = _Paths.CAMERA;
+  static const homenotFound = _Paths.notFound;
+  static const home = _Paths.home;
+  static const camera = _Paths.camera;
 }
 
 abstract class _Paths {
   _Paths._();
-  static const HOME = '/home';
-  static const CAMERA = '/camera';
+  static const notFound = '/notFound';
+  static const home = '/home';
+  static const camera = '/camera';
 }
